@@ -383,7 +383,7 @@ export class ChatCollectionManager extends CollectionManager {
     return ChatManager;
   }
 
-  constructor(collection, mediaCollectionClass, createPeerForContact) {
+  constructor(collection, mediaCollectionClass, createPeerForContact, chatClass, sendTextMsgToChat) {
     super(collection);
 
     ChatManager.prototype.buildMediaCollection = function() {
@@ -393,6 +393,10 @@ export class ChatCollectionManager extends CollectionManager {
     this.createPeerForContact = function(contactId) {
       return new createPeerForContact(contactId);
     }
+
+    this.chatClass.default.prototype.sendMessage = function(e) {
+		return sendTextMsgToChat(this, ...arguments)
+	}
   }
 
 

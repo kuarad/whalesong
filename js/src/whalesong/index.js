@@ -64,6 +64,8 @@ function getArtifactsDefs() {
     'mediaCollectionClass': (module) => (module.prototype && module.prototype.processFiles !== undefined) || (module.default && module.default.prototype && module.default.prototype.processFiles !== undefined) ? module.default ? module.default : module : null,
     'createPeerForContact': (module) => (module.default && module.default.prototype && module.default.prototype.isServer && module.default.prototype.isUser) ? module.default : null,
     'displayInfo': (module) => (module.default && module.default.markAvailable && module.default.unobscure) ? module.default : null,
+    'chatClass': (module) => (module.default && module.default.prototype && module.default.prototype.Collection !== undefined && module.default.prototype.Collection === "Chat") ? module : null,
+    'sendTextMsgToChat': (module) => (module.sendTextMsgToChat) ? module.sendTextMsgToChat : null,
   }
 }
 
@@ -93,7 +95,9 @@ function getRequirementsDefs() {
         let manager = new ChatCollectionManager(
           artifacts['store'].Chat,
           artifacts['mediaCollectionClass'],
-          artifacts['createPeerForContact']
+          artifacts['createPeerForContact'],
+          artifacts['chatClass']
+          artifacts['sendTextMsgToChat'],
         );
         mainManager.addSubmanager('chats', manager);
         return manager;
