@@ -96,8 +96,8 @@ function getRequirementsDefs() {
           artifacts['store'].Chat,
           artifacts['mediaCollectionClass'],
           artifacts['createPeerForContact'],
-          artifacts['chatClass']
-          artifacts['sendTextMsgToChat'],
+          artifacts['chatClass'],
+          artifacts['sendTextMsgToChat']
         );
         mainManager.addSubmanager('chats', manager);
         return manager;
